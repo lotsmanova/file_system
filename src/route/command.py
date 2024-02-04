@@ -110,7 +110,7 @@ def delete():
 
     try:
         # формируем команду bash
-        bash_command = f'rm {payload.object_name}'
+        bash_command = f'rm -R {payload.object_name}'
         subprocess.run(bash_command, shell=True, text=True, check=True)
 
         # возвращаем успешный ответ
