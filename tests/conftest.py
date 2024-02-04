@@ -1,5 +1,5 @@
 import pytest
-from src.config import db
+from src.config import db, DB_USER, DB_PASS, DB_HOST, DB_NAME_TEST
 from src.main import create_app
 
 
@@ -8,11 +8,12 @@ def test_client():
 
     # fixture initial app and db
     app = create_app()
+    # create test database
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME_TEST}'
     with app.test_client() as client:
         with app.app_context():
-            # Создаем таблицы
+            # create table
             db.create_all()
             yield client
-            # Закрываем сессию
+            # remove session
             db.session.remove()
-            db.drop_all()
