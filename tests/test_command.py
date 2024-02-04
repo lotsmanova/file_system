@@ -43,8 +43,10 @@ def test_chown(test_client):
 def test_delete(test_client):
     # TestCase6 delete file or directory
     response = test_client.delete('/rm', json={"object_name": "/home/v/test_dir"}, headers=auth_header())
+    response_file = test_client.delete('/rm', json={"object_name": "/home/v/test.txt"}, headers=auth_header())
     data = response.get_json()
     assert response.status_code == 200
+    assert response_file.status_code == 200
     assert 'message' in data
 
 
