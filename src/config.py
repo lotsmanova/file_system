@@ -11,8 +11,9 @@ DB_NAME = os.environ.get("POSTGRES_DB")
 DB_USER = os.environ.get("POSTGRES_USER")
 DB_PASS = os.environ.get("POSTGRES_PASSWORD")
 
-# setting for test db
+# setting for test
 DB_NAME_TEST = os.environ.get("DB_NAME_TEST")
+PATH_TEST_CASE = os.environ.get("PATH_TEST_CASE")
 
 SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}'
 db = SQLAlchemy()
