@@ -12,4 +12,4 @@ COPY . .
 
 ENV PYTHONPATH "${PYTHONPATH}:/app_fs/src/"
 
-EXPOSE 5000
+RUN chmod a+x docker/app.sh
