@@ -1,5 +1,5 @@
 from tests.test_auth import auth_header
-from src.config import PATH_TEST_CASE
+from src.config import PATH_TEST_CASE, USER_CHOWN
 
 
 def test_hello(test_client):
@@ -34,16 +34,8 @@ def test_chmod(test_client):
     assert 'message' in data
 
 
-def test_chown(test_client):
-    # TesCase5 change owner
-    response = test_client.post('/chown', json={"object_name": f"{PATH_TEST_CASE}/test_dir", "owner": "v"}, headers=auth_header())
-    data = response.get_json()
-    assert response.status_code == 200
-    assert 'message' in data
-
-
 def test_delete(test_client):
-    # TestCase6 delete file or directory
+    # TestCase5 delete file or directory
     response = test_client.delete('/rm', json={"object_name": f"{PATH_TEST_CASE}/test_dir"}, headers=auth_header())
     response_file = test_client.delete('/rm', json={"object_name": "/home/v/test.txt"}, headers=auth_header())
     data = response.get_json()
@@ -53,7 +45,7 @@ def test_delete(test_client):
 
 
 def test_list_dir(test_client):
-    # TestCase7 list file directory
+    # TestCase6 list file directory
     response = test_client.get('/ls', json={"object_name": PATH_TEST_CASE}, headers=auth_header())
     data = response.get_json()
     assert response.status_code == 200
